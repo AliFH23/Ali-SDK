@@ -8,7 +8,7 @@ import TrendingUp from "@mui/icons-material/TrendingUp";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import Settings from "@mui/icons-material/Settings";
 
-import { useLanguage } from "../../context/LanguageContext";
+import { useLanguage } from "../../Context/LanguageContext";
 import { translations } from "../../data/translations";
 
 

@@ -4,7 +4,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import logo from "../../assets/sdk.png";
 import { contactInfo } from "../../data/contactData";
-import { useLanguage } from "../../context/LanguageContext";
+import { useLanguage } from "../../Context/LanguageContext";
 import { translations } from "../../data/translations";
 
 const socialLinks = [

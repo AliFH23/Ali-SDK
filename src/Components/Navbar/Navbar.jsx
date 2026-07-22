@@ -1,5 +1,5 @@
 import { AppBar, Toolbar, Box, Button, Typography } from "@mui/material";
-import { useLanguage } from "../../context/LanguageContext";
+import { useLanguage } from "../../Context/LanguageContext";
 
 
 import { translations } from "../../data/translations";
