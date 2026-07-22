@@ -5,7 +5,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { departmentsData } from "../../data/departmentsData";
-import { useLanguage } from "../../Context/LanguageContext";
+import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
 
 function Departments() {

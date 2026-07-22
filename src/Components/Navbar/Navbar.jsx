@@ -1,6 +1,6 @@
 import { AppBar, Toolbar, Box, Button, Typography } from "@mui/material";
 import { useLanguage } from "../../Context/LanguageContext";
-
+import logo from "../../../src/assets/sdk.png";
 
 import { translations } from "../../data/translations";
 
@@ -36,7 +36,7 @@ function Navbar() {
           
         }}>
           <img
-            src="../../../src/assets/sdk.png"
+            src={logo}
             alt="logo"
             loading="lazy"
             width={120}

@@ -1,6 +1,6 @@
 import { Box, Typography, Button, Container } from "@mui/material";
 import heroImage from "../../assets/sdk.png";
-import { useLanguage } from "../../Context/LanguageContext";
+import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
 
 

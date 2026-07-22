@@ -1,7 +1,7 @@
 import { Box, Typography, Container, Stack } from "@mui/material";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import { accreditationsData } from "../../data/accreditationsData";
-import { useLanguage } from "../../Context/LanguageContext";
+import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
 
 function Accreditations() {

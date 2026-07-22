@@ -1,7 +1,7 @@
 import { Box, Typography, Container, Grid, Chip, Stack } from "@mui/material";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import { academicPartners, clientsData } from "../../data/partnershipsData";
-import { useLanguage } from "../../Context/LanguageContext";
+import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
 
 function Partnerships() {
