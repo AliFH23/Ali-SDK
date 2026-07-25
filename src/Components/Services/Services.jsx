@@ -3,7 +3,7 @@ import TuneIcon from "@mui/icons-material/Tune";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import GroupsIcon from "@mui/icons-material/Groups";
 import InsightsIcon from "@mui/icons-material/Insights";
-import { useLanguage } from "../../context/LanguageContext";
+import { useLanguage } from "../../Context/LanguageContext";
 import { translations } from "../../data/translations";
 
 const servicesMeta = [

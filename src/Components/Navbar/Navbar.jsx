@@ -1,108 +1,191 @@
-import { AppBar, Toolbar, Box, Button, Typography } from "@mui/material";
-import { useLanguage } from "../../Context/LanguageContext";
-import logo from "../../../src/assets/sdk.png";
+import { useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  Button,
+  Typography,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
+import { useLanguage } from "../../Context/LanguageContext";
+import logo from "../../assets/sdk.png";
 import { translations } from "../../data/translations";
 
 function Navbar() {
   const { language, toggleLanguage } = useLanguage();
-
+  const [openMenu, setOpenMenu] = useState(false);
 
   const t = translations[language];
 
   const navLinks = [
-  { label: t.nav.home, id: "home" },
-  { label: t.nav.about, id: "about" },
-  { label: t.nav.services, id: "services" },
-  { label: t.nav.departments, id: "departments" },
-  { label: t.nav.accreditations, id: "accreditations" },
-  { label: t.nav.partnerships, id: "partnerships" },
+    { label: t.nav.home, id: "home" },
+    { label: t.nav.about, id: "about" },
+    { label: t.nav.services, id: "services" },
+    { label: t.nav.departments, id: "departments" },
+    { label: t.nav.accreditations, id: "accreditations" },
+    { label: t.nav.partnerships, id: "partnerships" },
   ];
 
   return (
-    <AppBar position="sticky">
-      <Toolbar
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          gap: 5,
-          backgroundColor: "#1E76BA",
-          justifyContent: "space-between",
-          height: 100,
-          px: 4,
-        }}
-      >
-        <Box sx={{
-          
-        }}>
-          <img
+    <>
+      <AppBar position="sticky" sx={{ backgroundColor: "#1E76BA" }}>
+        <Toolbar
+          sx={{
+            justifyContent: "space-between",
+            height: {
+              xs: 70,
+              md: 100,
+            },
+            px: {
+              xs: 2,
+              md: 4,
+            },
+          }}
+        >
+          {/* Logo */}
+          <Box
+            component="img"
             src={logo}
-            alt="logo"
-            loading="lazy"
-            width={120}
-            height={120}
+            alt="SDK Logo"
+            sx={{
+              width: {
+                xs: 80,
+                md: 120,
+              },
+              height: "auto",
+            }}
           />
-        </Box>
 
-        <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
-          {navLinks.map((link) => (
-            <Button
-              key={link.id}
-              href={`#${link.id}`}
+          {/* Desktop Menu */}
+          <Box
+            sx={{
+              display: {
+                xs: "none",
+                md: "flex",
+              },
+              alignItems: "center",
+              gap: 2,
+            }}
+          >
+            {navLinks.map((link) => (
+              <Button
+                key={link.id}
+                href={`#${link.id}`}
+                sx={{
+                  color: "#fff",
+                  fontWeight: 600,
+                  textTransform: "none",
+                  "&:hover": {
+                    color: "#00AEEF",
+                  },
+                }}
+              >
+                {link.label}
+              </Button>
+            ))}
+
+            {/* Language Button */}
+            <Box
+              onClick={toggleLanguage}
               sx={{
-                color: "#FFFFFF",
-                fontFamily: '"Inter", sans-serif',
-                fontWeight: 600,
+                display: "flex",
+                alignItems: "center",
+                gap: 0.5,
+                cursor: "pointer",
+                px: 1.5,
+                py: 0.5,
+                borderRadius: 2,
+                border: "1px solid rgba(255,255,255,0.4)",
                 "&:hover": {
-                  color: "#00AEEF",
+                  backgroundColor: "rgba(255,255,255,0.1)",
                 },
               }}
             >
-              {link.label}
-            </Button>
-          ))}
+              <Typography
+                sx={{
+                  color: "#fff",
+                  fontWeight: language === "ar" ? 700 : 400,
+                  opacity: language === "ar" ? 1 : 0.6,
+                }}
+              >
+                ع
+              </Typography>
 
-          <Box
-            onClick={toggleLanguage}
+              <Typography sx={{ color: "#fff", opacity: 0.5 }}>
+                /
+              </Typography>
+
+              <Typography
+                sx={{
+                  color: "#fff",
+                  fontWeight: language === "en" ? 700 : 400,
+                  opacity: language === "en" ? 1 : 0.6,
+                }}
+              >
+                E
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* Mobile Menu Button */}
+          <IconButton
+            onClick={() => setOpenMenu(true)}
             sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 0.5,
-              cursor: "pointer",
-              px: 1.5,
-              py: 0.5,
-              borderRadius: "8px",
-              border: "1px solid rgba(255,255,255,0.4)",
-              "&:hover": {
-                backgroundColor: "rgba(255,255,255,0.1)",
+              display: {
+                xs: "flex",
+                md: "none",
               },
+              color: "#fff",
             }}
           >
-            <Typography
-              sx={{
-                color: "#FFFFFF",
-                fontSize: "0.85rem",
-                fontWeight: language === "ar" ? 700 : 400,
-                opacity: language === "ar" ? 1 : 0.6,
-              }}
-            >
-              عربي
-            </Typography>
-            <Typography sx={{ color: "#FFFFFF", opacity: 0.5 }}>/</Typography>
-            <Typography
-              sx={{
-                color: "#FFFFFF",
-                fontSize: "0.85rem",
-                fontWeight: language === "en" ? 700 : 400,
-                opacity: language === "en" ? 1 : 0.6,
-              }}
-            >
-              EN
-            </Typography>
-          </Box>
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+
+      {/* Drawer */}
+      <Drawer
+        anchor="right"
+        open={openMenu}
+        onClose={() => setOpenMenu(false)}
+      >
+        <Box sx={{ width: 260 }}>
+          <List>
+            {navLinks.map((link) => (
+              <ListItem key={link.id} disablePadding>
+                <ListItemButton
+                  component="a"
+                  href={`#${link.id}`}
+                  onClick={() => setOpenMenu(false)}
+                >
+                  <ListItemText primary={link.label} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => {
+                  toggleLanguage();
+                  setOpenMenu(false);
+                }}
+              >
+                <ListItemText
+                  primary={language === "ar" ? "English" : "العربية"}
+                />
+              </ListItemButton>
+            </ListItem>
+          </List>
         </Box>
-      </Toolbar>
-    </AppBar>
+      </Drawer>
+    </>
   );
 }
 
