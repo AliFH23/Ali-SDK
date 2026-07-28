@@ -16,7 +16,8 @@ function Accreditations() {
         </Typography>
         <Typography
           variant="h2"
-          sx={{ fontSize: { xs: "1.75rem", md: "2.25rem" }, color: "#101828", mb: 6 }}
+          dir="rtl"
+          sx={{ unicodeBidi:"plaintext", fontSize: { xs: "1.75rem", md: "2.25rem" }, color: "#101828", mb: 6 }}
         >
           {t.title}
         </Typography>
@@ -54,7 +55,8 @@ function Accreditations() {
                   <VerifiedIcon sx={{ color: "#0072BC", fontSize: 28 }} />
                 </Box>
                 <Typography
-                  sx={{ fontFamily: '"Poppins", sans-serif', fontWeight: 600, color: "#101828", mb: 1 }}
+                  
+                  sx={{  fontFamily: '"Poppins", sans-serif', fontWeight: 600, color: "#101828", mb: 1 }}
                 >
                   {itemText.title}
                 </Typography>

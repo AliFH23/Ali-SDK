@@ -22,11 +22,14 @@ function Departments() {
         </Typography>
         <Typography
           variant="h2"
-          sx={{ fontSize: { xs: "1.75rem", md: "2.25rem" }, color: "#101828", mb: 1 }}
+          dir="rtl"
+          sx={{ unicodeBidi:"plaintext", fontSize: { xs: "1.75rem", md: "2.25rem" }, color: "#101828", mb: 1 }}
         >
           {t.title}
         </Typography>
-        <Typography sx={{ color: "#5C6570", mb: 5, maxWidth: 560 }}>
+        <Typography 
+          dir="rtl"  
+          sx={{ unicodeBidi:"plaintext", color: "#5C6570", mb: 5, }}>
           {t.subtitle}
         </Typography>
 

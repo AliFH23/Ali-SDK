@@ -9,6 +9,7 @@ import Accreditations from './Components/Accreditations/Accreditations'
 import Partnerships from './Components/Partnerships/Partnerships'
 import Contact from './Components/Contact/Contact'
 import Footer from './Components/Footer.jsx/Footer'
+import Stats from './Components/Stats/Stats'
 
 function App() {
  
@@ -16,6 +17,7 @@ function App() {
     <>
           <Navbar/>
           <Hero/>
+          <Stats/>
           <About/> 
           <Services/> 
           <Departments/>    

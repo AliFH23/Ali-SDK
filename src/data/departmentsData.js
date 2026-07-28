@@ -47,14 +47,10 @@ export const departmentsData = [
     modules: [
       {
         code: "DES-01",
-        title: "تصميم جرافيكي",
+        title: "Graphic design",
         courses: ["Photoshop CC (1,2)", "Illustrator CC (1,2)", "InDesign CC"],
       },
-      {
-        code: "DES-02",
-        title: "تصميم داخلي",
-        courses: ["AutoCAD", "3D - MAX"],
-      },
+      
     ],
   },
   {

@@ -3,6 +3,7 @@ import albalqa from "../assets/albalqa.png";
 import yarmouk from "../assets/yarmouk.png";
 import jadara from "../assets/jadara.png";
 import irbidNational from "../assets/irbid-national.png";
+import alBayt from "../assets/Al al-Bayt.png";
 
 export const academicPartners = [
   { name: "Jadara University", logo: jadara },
@@ -10,6 +11,7 @@ export const academicPartners = [
   { name: "Yarmouk University", logo: yarmouk },
   { name: "Jordan University of Science and Technology", logo: justlogo },
   { name: "Irbid National University", logo: irbidNational },
+  { name: "Al al-Bayt University", logo : alBayt },
 ];
 
 export const clientsData = [

@@ -16,13 +16,14 @@ function Partnerships() {
         </Typography>
         <Typography
           variant="h2"
-          sx={{ fontSize: { xs: "1.75rem", md: "2.25rem" }, color: "#101828", mb: 6 }}
+          dir="rtl"
+          sx={{ unicodeBidi:"plaintext", fontSize: { xs: "1.75rem", md: "2.25rem" }, color: "#101828", mb: 6 }}
         >
           {t.title}
         </Typography>
 
         {/* Initiatives */}
-        <Typography sx={{ fontWeight: 600, color: "#101828", mb: 3, fontSize: "1.1rem" }}>
+        <Typography  sx={{ unicodeBidi:"plaintext", fontWeight: 600, color: "#101828", mb: 3, fontSize: "1.1rem" }}>
           {t.initiativesTitle}
         </Typography>
         <Grid container spacing={3} sx={{ mb: 8 }}>
@@ -31,10 +32,10 @@ function Partnerships() {
               <Stack direction="row" spacing={2} sx={{ p: 3, border: "1px solid #E7E9EC", borderRadius: "12px", height: "100%" }}>
                 <HandshakeIcon sx={{ color: "#0072BC", flexShrink: 0, mt: 0.3 }} />
                 <Box>
-                  <Typography sx={{ fontWeight: 600, color: "#101828", mb: 0.5 }}>
+                  <Typography  sx={{ unicodeBidi:"plaintext", fontWeight: 600, color: "#101828", mb: 0.5 }}>
                     {item.title}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: "#5C6570", lineHeight: 1.7 }}>
+                  <Typography variant="body2" sx={{unicodeBidi:"plaintext", color: "#5C6570", lineHeight: 1.7 }}>
                     {item.description}
                   </Typography>
                 </Box>
@@ -44,10 +45,10 @@ function Partnerships() {
         </Grid>
 
         {/* Academic Partners */}
-        <Typography sx={{ fontWeight: 600, color: "#101828", mb: 3, fontSize: "1.1rem" }}>
+        <Typography  sx={{unicodeBidi:"plaintext", fontWeight: 600, color: "#101828", mb: 3, fontSize: "1.1rem"}}>
           {t.academicTitle}
         </Typography>
-        <Stack direction="row" gap={10} sx={{ mb: 8, flexWrap: "wrap", alignItems: "center" }}>
+        <Stack direction="row"   sx={{unicodeBidi:"plaintext", mb: 8,gap:5, flexWrap: "wrap", alignItems: "space-betwen" }}>
           {academicPartners.map((uni) => (
             <Box
               key={uni.name}
@@ -61,6 +62,7 @@ function Partnerships() {
                 border: "1px solid #E7E9EC",
                 borderRadius: "12px",
                 backgroundColor: "#FFFFFF",
+                
               }}
             >
               <Box
@@ -78,7 +80,7 @@ function Partnerships() {
         </Stack>
 
         {/* Clients */}
-        <Typography sx={{ fontWeight: 600, color: "#101828", mb: 3, fontSize: "1.1rem" }}>
+        <Typography sx={{ unicodeBidi:"plaintext", fontWeight: 600, color: "#101828", mb: 3, fontSize: "1.1rem" }}>
           {t.clientsTitle}
         </Typography>
         <Stack direction="row" gap={1.5} sx={{ flexWrap: "wrap" }}>

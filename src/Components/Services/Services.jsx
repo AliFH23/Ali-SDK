@@ -18,15 +18,27 @@ function Services() {
   const t = translations[language].services;
 
   return (
-    <Box id="services" sx={{ backgroundColor: "#FAFAFB", py: { xs: 8, md: 12 } }}>
+    <Box id="services"  sx={{  backgroundColor: "#FAFAFB", py: { xs: 8, md: 12 } }}>
       <Container maxWidth="lg">
         <Typography variant="overline" sx={{ color: "#0072BC", display: "block", mb: 1 }}>
           {t.overline}
         </Typography>
-        <Typography variant="h2" sx={{ fontSize: { xs: "1.75rem", md: "2.25rem" }, color: "#101828", mb: 1 }}>
+        <Typography variant="h2" dir="rtl" sx={{ fontSize: { xs: "1.75rem", md: "2.25rem"},  color: "#101828", mb: 1,unicodeBidi:"plaintext", }}>
           {t.title}
         </Typography>
-        <Typography sx={{ color: "#5C6570", mb: 6, maxWidth: 560 }}>
+        <Typography
+          variant="body1"
+          dir={language === "ar" ? "rtl" : "ltr"}
+          sx={{
+            color: "#5C6570",
+            mb: 6,
+            maxWidth: 560,
+            ml: language === "ar" ? "auto" : 0,
+            mr: language === "ar" ? 0 : "auto",
+            unicodeBidi: "plaintext",
+            textAlign: language === "ar" ? "right" : "left",
+          }}
+        >
           {t.subtitle}
         </Typography>
 
@@ -80,10 +92,10 @@ function Services() {
                 >
                   <Icon sx={{ color: service.color, fontSize: 26 }} />
                 </Box>
-                <Typography variant="h4" sx={{ fontSize: "1.1rem", color: "#101828", mb: 1.5 }}>
+                <Typography variant="h4" dir="rtl" sx={{unicodeBidi:"plaintext", fontSize: "1.1rem", color: "#101828", mb: 1.5 }}>
                   {itemText.title}
                 </Typography>
-                <Typography variant="body2" sx={{ color: "#5C6570", lineHeight: 1.8, fontSize: "0.9rem" }}>
+                <Typography variant="body2"dir="rtl" sx={{ unicodeBidi:"plaintext", color: "#5C6570", lineHeight: 1.8, fontSize: "0.9rem" }}>
                   {itemText.description}
                 </Typography>
               </Paper>

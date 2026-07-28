@@ -22,15 +22,15 @@ export const translations = {
       description: "تأسست شركة SDK في عام 2004 كنتيجة لرؤية واضحة لأهمية التدريب الاحترافي في المنطقة، وبهدف سامي يتمحور على تمكين الأفراد من الأدوات التدريبية وتزويدهم بالوعي الكافي لتطوير مهاراتهم بمختلف التخصصات. واليوم وبعد هذه المسيرة الطويلة، تمكنت SDK من البقاء كمنافس أول من خلال دراسة متطلبات سوق العمل وتقديم الحلول والبرامج التدريبية ذات المستوى العالمي وبجودة ومهنية واضحة.",
       vision: {
         title: "رؤيتنا",
-        text: "مجمع استشاري تدريبي لتطوير الحلول (إدارياً، برمجياً، تسويقياً، تقنياً، صحياً، نفسياً) يُلبي احتياج السوق المحلي والإقليمي.",
+        text: "يهدف المعرض أن يكون منصة رائدة تبرز طاقات الشباب و ابداعتهم وان تبني جسرا يربطهم بأرباب العمل و المتخصصين ; لتمكينهم من الانطلاق نحو مستقبل مشرق",
       },
       mission: {
         title: "رسالتنا",
-        text: "إكساب الموارد البشرية المهارات والأدوات المهنية والتقنية اللازمة لمواكبة تطور سوق العمل.",
+        text: "نسعى دوما لاتاحةالفرصة الشباب كي يبرزوا قدراتهم و ذلك عبر تقديم مشاريع متكاملة بعد تدريبهم وصقل مهاراتهم بما يعكس تقديرنا لامكاناتهم و ثقتنا بمستقبلهم",
       },
       values: {
         title: "قيمنا ومبادئنا",
-        list: ["نشر الوعي", "الحرص على جودة المخرجات", "المصداقية", "الإبداع في الحلول"],
+        list: ["الابداع","التمكين","التواصل","المسؤولية المجتمعية ","الاستدامة"],
       },
     },
     services: {
@@ -59,10 +59,14 @@ export const translations = {
       title: "الاعتمادات",
       items: [
         { title: "PEARSON VUE" },
-        { title: "وزارة العمل الأردنية"},
         { title: "اعتماد الشهادات" },
-        { title: "IAO" },
+        
       ],
+    },
+    stats: {
+      students: { value: 11000, suffix: "+", label: "طالب انتسب للشركة" },
+      successStories: { value: 1000, suffix: "+", label: "قصة نجاح" },
+      experience: { value: 20, suffix: "+", label: "سنة خبرة" },
     },
     partnerships: {
       overline: "PARTNERS & ACTIVITIES",
@@ -108,6 +112,11 @@ export const translations = {
       partnerships: "Partnerships",
       contact: "Contact Us",
     },
+    stats: {
+    students: { value: 11000, suffix: "+", label: "Enrolled Students" },
+    successStories: { value: 1000, suffix: "+", label: "Success Stories" },
+    experience: { value: 20, suffix: "+", label: "Years of Experience" },
+  },
     hero: {
       overline: "SDK TRAINING CENTER",
       title: "Touch Your Future",
@@ -121,15 +130,15 @@ export const translations = {
       description: "SDK was founded in 2004 as a result of a clear vision for the importance of professional training in the region, with a noble goal centered on empowering individuals with the training tools and awareness needed to develop their skills across various specializations. Today, after this long journey, SDK has managed to remain a leading competitor by studying labor market requirements and offering world-class training solutions and programs with clear quality and professionalism.",
       vision: {
         title: "Our Vision",
-        text: "A consulting and training hub developing solutions (administrative, software, marketing, technical, health, and psychological) that meet local and regional market needs.",
+        text: "The exhibition aims to be a leading platform that showcases the energies and creativity of young people, and to build a bridge connecting them with employers and specialists, enabling them to launch towards a bright future.",
       },
       mission: {
         title: "Our Mission",
-        text: "Equipping human resources with the skills and professional and technical tools needed to keep pace with labor market developments.",
+        text: "We always strive to provide young people with opportunities to showcase their abilities by offering them integrated projects after training and honing their skills, reflecting our appreciation for their potential and our confidence in their future.",
       },
       values: {
         title: "Our Values & Principles",
-        list: ["Spreading Awareness", "Commitment to Output Quality", "Credibility", "Creativity in Solutions"],
+        list: ["Creativity", "Empowerment", "Communication", "Corporate Social Responsibility","Sustainability"],
       },
     },
     services: {
@@ -158,9 +167,7 @@ export const translations = {
       title: "Accreditations",
       items: [
         { title: "PEARSON VUE"},
-        { title: "Jordanian Ministry of Labour" },
         { title: "Certificate Accreditation" },
-        { title: "IAO" },
       ],
     },
     partnerships: {

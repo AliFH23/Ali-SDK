@@ -34,11 +34,12 @@ function About() {
         >
           {t.overline}
         </Typography>
-        <Typography variant="h2" sx={{ fontSize: { xs: "1.75rem", md: "2.25rem" }, color: "#101828", mb: 3 }}>
+        <Typography dir="rtl" variant="h2" sx={{unicodeBidi:"plaintext", fontSize: { xs: "1.75rem", md: "2.25rem" }, color: "#101828", mb: 3 }}>
          {t.title}
         </Typography>
         <Typography
          variant="body1"
+         dir="rtl"
           sx={{
             color: "#5C6570",
             fontSize: "1.05rem",
@@ -47,6 +48,7 @@ function About() {
             mx: "auto",
             mb: 8,
             textAlign: "center",
+            unicodeBidi: "plaintext",
           }}
          >
           {t.description}
@@ -61,11 +63,11 @@ function About() {
             borderRadius: "12px",
           }}
         >
-          <TrendingUp sx={{ color: "#D6006D", fontSize: 32, mb: 2 }} />
-          <Typography variant="h4" sx={{ fontSize: "1.15rem", color: "#101828", mb: 1.5 }}>
+          <TrendingUp dir="rtl" sx={{ color: "#D6006D", unicodeBidi: "plaintext", fontSize: 32, mb: 2 }} />
+          <Typography variant="h4" dir="rtl" sx={{ fontSize: "1.15rem",unicodeBidi: "plaintext", color: "#101828", mb: 1.5 }}>
             {t.vision.title}
           </Typography>
-          <Typography variant="body2" sx={{ color: "#5C6570", lineHeight: 1.8 }}>
+          <Typography variant="body2"  dir="rtl" sx={{ color: "#5C6570", unicodeBidi: "plaintext", lineHeight: 1.8 }}>
            {t.vision.text}
           </Typography>
         </Paper>
@@ -79,10 +81,10 @@ function About() {
           }}
         >
           <EmailOutlinedIcon sx={{ color: "#D6006D", fontSize: 32, mb: 2 }} />
-          <Typography variant="h4" sx={{ fontSize: "1.15rem", color: "#101828", mb: 1.5 }}>
+          <Typography variant="h4"dir="rtl" sx={{ fontSize: "1.15rem",unicodeBidi: "plaintext", color: "#101828", mb: 1.5 }}>
             {t.mission.title}
           </Typography>
-          <Typography variant="body2" sx={{ color: "#5C6570", lineHeight: 1.8 }}>
+          <Typography variant="body2" dir="rtl" sx={{ color: "#5C6570",unicodeBidi: "plaintext", lineHeight: 1.8 }}>
            {t.mission.text}
           </Typography>
         </Paper>
@@ -96,12 +98,12 @@ function About() {
           }}
         >
           <Settings sx={{ color: "#D6006D", fontSize: 32, mb: 2 }} />
-          <Typography variant="h4" sx={{ fontSize: "1.15rem", color: "#101828", mb: 1.5 }}>
+          <Typography variant="h4" dir="rtl" sx={{ fontSize: "1.15rem",unicodeBidi: "plaintext", color: "#101828", mb: 1.5 }}>
             {t.values.title}
           </Typography>
-              <Box component="ul" sx={{ m: 0, pl: 2.5, color: "#5C6570" }}>
+              <Box component="ul" dir="rtl" sx={{ m: 0,unicodeBidi: "plaintext", pl: 2.5, color: "#5C6570" }}>
                   {t.values.list.map((value) => (
-                    <Typography key={value} component="li" variant="body2" sx={{ lineHeight: 2 }}>
+                    <Typography key={value}  dir="rtl" variant="body2" sx={{ lineHeight: 2 ,unicodeBidi: "plaintext", }}>
                       {value}
                     </Typography>
                   ))}

@@ -2,7 +2,7 @@ import { Box, Typography, Button, Container } from "@mui/material";
 import heroImage from "../../assets/sdk.png";
 import { useLanguage } from "../../Context/LanguageContext";
 import { translations } from "../../data/translations";
-
+import reelvideo from "../../assets/videoSDK.mp4";
 
 function Hero() {
 
@@ -41,7 +41,7 @@ function Hero() {
           <Typography variant="h1" sx={{ fontSize: { xs: "2rem", md: "3rem" }, color: "#101828", mb: 2 }}>
             {t.title}
           </Typography>
-          <Typography variant="body1" sx={{ color: "#5C6570", fontSize: "1.1rem", mb: 4, maxWidth: 480 }}>
+          <Typography variant="body1" dir="rtl" sx={{ color: "#5C6570", fontSize: "1.1rem", mb: 4, maxWidth: 480,unicodeBidi: "plaintext", }}>
             {t.description}
           </Typography>
           <Box sx={{ display:  "flex",
@@ -86,23 +86,33 @@ function Hero() {
 
         <Box
           sx={{
-            flex: 1,
-            position: "relative",
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
+                flex: 1,
+                position: "relative",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+            
           }}
         >
           <Box
-            component="img"
-            src={heroImage}
-            alt="SDK Training"
+            component="video"
+            src={reelvideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            controls
+            preload="auto"
             sx={{
               width: "100%",
-              maxWidth: 420,
+              maxWidth: "100%",
+              height: { xs: 450, md: 680 },
+              objectFit: "cover",
+              imageRendering: "high-quality",
               borderRadius: "16px",
               position: "relative",
               zIndex: 2,
+              boxShadow: "0 20px 40px rgba(16,24,40,0.15)",
             }}
           />
         </Box>
