@@ -3,7 +3,6 @@ import {
   Box,
   Typography,
   Container,
-  Stack,
   Paper,
 } from "@mui/material";
 
@@ -24,9 +23,14 @@ function useCountUp(target, shouldStart, duration = 1500) {
     let animationFrame;
 
     const step = (timestamp) => {
-      if (!startTime) startTime = timestamp;
+      if (startTime === null) {
+        startTime = timestamp;
+      }
 
-      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const progress = Math.min(
+        (timestamp - startTime) / duration,
+        1
+      );
 
       setCount(Math.floor(progress * target));
 
@@ -38,7 +42,9 @@ function useCountUp(target, shouldStart, duration = 1500) {
     animationFrame = requestAnimationFrame(step);
 
     return () => {
-      cancelAnimationFrame(animationFrame);
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
     };
   }, [shouldStart, target, duration]);
 
@@ -61,19 +67,20 @@ function StatItem({
     <Paper
       elevation={0}
       sx={{
-        flex: 1,
         width: "100%",
-        minHeight: 230,
+        minHeight: 240,
         p: { xs: 3, md: 4 },
+        boxSizing: "border-box",
         border: "1px solid #E7E9EC",
-        borderRadius: "18px",
+        borderRadius: "20px",
         backgroundColor: "#FFFFFF",
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        transition: "transform 0.25s ease, box-shadow 0.25s ease",
+        transition:
+          "transform 0.25s ease, box-shadow 0.25s ease",
 
         "&:hover": {
           transform: "translateY(-6px)",
@@ -109,17 +116,18 @@ function StatItem({
           fontSize: { xs: "2.2rem", md: "3rem" },
           color,
           lineHeight: 1.2,
+          whiteSpace: "nowrap",
         }}
       >
         {isArabic ? (
           <>
-            {count.toLocaleString()}
+            {count.toLocaleString("en-US")}
             {suffix}
           </>
         ) : (
           <>
             {suffix}
-            {count.toLocaleString()}
+            {count.toLocaleString("en-US")}
           </>
         )}
       </Typography>
@@ -147,6 +155,10 @@ function Stats() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -159,9 +171,7 @@ function Stats() {
       }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    observer.observe(section);
 
     return () => {
       observer.disconnect();
@@ -196,13 +206,33 @@ function Stats() {
       }}
     >
       <Container maxWidth="lg">
-        <Stack
-          direction={{ xs: "column", sm: "row" }}
-          spacing={3}
+        <Box
+          sx={{
+            display: "grid",
+
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "repeat(2, minmax(0, 1fr))",
+              md: "repeat(3, minmax(0, 1fr))",
+            },
+
+            // الفراغ الحقيقي بين الكروت
+            columnGap: {
+              xs: 3,
+              md: 6,
+            },
+
+            rowGap: {
+              xs: 3,
+              md: 4,
+            },
+
+            alignItems: "stretch",
+          }}
         >
           {items.map((item, index) => (
             <StatItem
-              key={index}
+              key={`${item.label}-${index}`}
               value={item.value}
               suffix={item.suffix}
               label={item.label}
@@ -212,7 +242,7 @@ function Stats() {
               icon={item.icon}
             />
           ))}
-        </Stack>
+        </Box>
       </Container>
     </Box>
   );
