@@ -1,5 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { Box, Typography, Container, Stack } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Container,
+  Stack,
+  Paper,
+} from "@mui/material";
+
+import SchoolIcon from "@mui/icons-material/School";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+
 import { useLanguage } from "../../Context/LanguageContext";
 import { translations } from "../../data/translations";
 
@@ -8,59 +19,130 @@ function useCountUp(target, shouldStart, duration = 1500) {
 
   useEffect(() => {
     if (!shouldStart) return;
+
     let startTime = null;
+    let animationFrame;
 
     const step = (timestamp) => {
       if (!startTime) startTime = timestamp;
+
       const progress = Math.min((timestamp - startTime) / duration, 1);
+
       setCount(Math.floor(progress * target));
-      if (progress < 1) requestAnimationFrame(step);
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(step);
+      }
     };
 
-    requestAnimationFrame(step);
+    animationFrame = requestAnimationFrame(step);
+
+    return () => {
+      cancelAnimationFrame(animationFrame);
+    };
   }, [shouldStart, target, duration]);
 
   return count;
 }
 
-function StatItem({ value, suffix, label, shouldStart, color,language  }) {
+function StatItem({
+  value,
+  suffix,
+  label,
+  shouldStart,
+  color,
+  language,
+  icon: Icon,
+}) {
   const count = useCountUp(value, shouldStart);
+  const isArabic = language === "ar";
 
   return (
-    <Box sx={{ textAlign: "center", flex: 1 }}>
-      
-      
+    <Paper
+      elevation={0}
+      sx={{
+        flex: 1,
+        width: "100%",
+        minHeight: 230,
+        p: { xs: 3, md: 4 },
+        border: "1px solid #E7E9EC",
+        borderRadius: "18px",
+        backgroundColor: "#FFFFFF",
+        textAlign: "center",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        transition: "transform 0.25s ease, box-shadow 0.25s ease",
+
+        "&:hover": {
+          transform: "translateY(-6px)",
+          boxShadow: "0 18px 40px rgba(16,24,40,0.10)",
+        },
+      }}
+    >
+      <Box
+        sx={{
+          width: 58,
+          height: 58,
+          borderRadius: "50%",
+          backgroundColor: `${color}14`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          mb: 2,
+        }}
+      >
+        <Icon
+          sx={{
+            color,
+            fontSize: 30,
+          }}
+        />
+      </Box>
 
       <Typography
+        dir="ltr"
         sx={{
           fontFamily: '"Poppins", sans-serif',
           fontWeight: 700,
           fontSize: { xs: "2.2rem", md: "3rem" },
           color,
+          lineHeight: 1.2,
         }}
       >
-        {language === "en" ? (
-            <>
-                {suffix}
-                {count.toLocaleString()}
-            </>
-            ) : (
-            <>
-                {count.toLocaleString()}
-                {suffix}
-            </>
-            )}
+        {isArabic ? (
+          <>
+            {count.toLocaleString()}
+            {suffix}
+          </>
+        ) : (
+          <>
+            {suffix}
+            {count.toLocaleString()}
+          </>
+        )}
       </Typography>
-      <Typography sx={{ color: "#5C6570", mt: 1, fontSize: "1rem" }}>
+
+      <Typography
+        sx={{
+          color: "#5C6570",
+          mt: 1.5,
+          fontSize: "1rem",
+          fontWeight: 500,
+          textAlign: "center",
+        }}
+      >
         {label}
       </Typography>
-    </Box>
+    </Paper>
   );
 }
 
 function Stats() {
   const { language } = useLanguage();
   const t = translations[language].stats;
+
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
@@ -72,35 +154,51 @@ function Stats() {
           observer.disconnect();
         }
       },
-      { threshold: 0.3 }
+      {
+        threshold: 0.3,
+      }
     );
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const items = [
-    { ...t.students, color: "#D6006D" },
-    { ...t.successStories, color: "#0072BC" },
-    { ...t.experience, color: "#00AEEF" },
+    {
+      ...t.students,
+      color: "#D6006D",
+      icon: SchoolIcon,
+    },
+    {
+      ...t.successStories,
+      color: "#0072BC",
+      icon: EmojiEventsIcon,
+    },
+    {
+      ...t.experience,
+      color: "#00AEEF",
+      icon: WorkspacePremiumIcon,
+    },
   ];
 
   return (
-    <Box ref={sectionRef} sx={{ backgroundColor: "#FAFAFB", py: { xs: 6, md: 8 } }}>
+    <Box
+      ref={sectionRef}
+      dir={language === "ar" ? "rtl" : "ltr"}
+      sx={{
+        backgroundColor: "#F8FAFC",
+        py: { xs: 7, md: 10 },
+      }}
+    >
       <Container maxWidth="lg">
         <Stack
           direction={{ xs: "column", sm: "row" }}
-          spacing={{ xs: 4, sm: 2 }}
-          divider={
-            <Box
-              sx={{
-                width: { xs: "60px", sm: "1px" },
-                height: { xs: "1px", sm: "60px" },
-                backgroundColor: "#E7E9EC",
-                alignSelf: "center",
-              }}
-            />
-          }
+          spacing={3}
         >
           {items.map((item, index) => (
             <StatItem
@@ -111,6 +209,7 @@ function Stats() {
               color={item.color}
               shouldStart={isVisible}
               language={language}
+              icon={item.icon}
             />
           ))}
         </Stack>

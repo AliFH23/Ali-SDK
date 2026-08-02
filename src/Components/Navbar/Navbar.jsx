@@ -23,6 +23,7 @@ function Navbar() {
   const [openMenu, setOpenMenu] = useState(false);
 
   const t = translations[language];
+  const isArabic = language === "ar";
 
   const navLinks = [
     { label: t.nav.home, id: "home" },
@@ -33,9 +34,16 @@ function Navbar() {
     { label: t.nav.partnerships, id: "partnerships" },
   ];
 
+  const displayLinks = isArabic ? [...navLinks].reverse() : navLinks;
+
   return (
     <>
-      <AppBar position="sticky" sx={{ backgroundColor: "#1E76BA" }}>
+      <AppBar
+        position="sticky"
+        sx={{
+          backgroundColor: "#1E76BA",
+        }}
+      >
         <Toolbar
           sx={{
             justifyContent: "space-between",
@@ -60,6 +68,7 @@ function Navbar() {
                 md: 120,
               },
               height: "auto",
+              flexShrink: 0,
             }}
           />
 
@@ -74,7 +83,7 @@ function Navbar() {
               gap: 2,
             }}
           >
-            {navLinks.map((link) => (
+            {displayLinks.map((link) => (
               <Button
                 key={link.id}
                 href={`#${link.id}`}
@@ -82,8 +91,11 @@ function Navbar() {
                   color: "#fff",
                   fontWeight: 600,
                   textTransform: "none",
+                  whiteSpace: "nowrap",
+
                   "&:hover": {
                     color: "#00AEEF",
+                    backgroundColor: "transparent",
                   },
                 }}
               >
@@ -91,18 +103,21 @@ function Navbar() {
               </Button>
             ))}
 
-            {/* Language Button */}
+            {/* Language Button - ثابت */}
             <Box
               onClick={toggleLanguage}
               sx={{
                 display: "flex",
                 alignItems: "center",
+                direction: "ltr",
                 gap: 0.5,
                 cursor: "pointer",
                 px: 1.5,
                 py: 0.5,
                 borderRadius: 2,
                 border: "1px solid rgba(255,255,255,0.4)",
+                flexShrink: 0,
+
                 "&:hover": {
                   backgroundColor: "rgba(255,255,255,0.1)",
                 },
@@ -111,22 +126,27 @@ function Navbar() {
               <Typography
                 sx={{
                   color: "#fff",
-                  fontWeight: language === "ar" ? 700 : 400,
-                  opacity: language === "ar" ? 1 : 0.6,
+                  fontWeight: isArabic ? 700 : 400,
+                  opacity: isArabic ? 1 : 0.6,
                 }}
               >
                 ع
               </Typography>
 
-              <Typography sx={{ color: "#fff", opacity: 0.5 }}>
+              <Typography
+                sx={{
+                  color: "#fff",
+                  opacity: 0.5,
+                }}
+              >
                 /
               </Typography>
 
               <Typography
                 sx={{
                   color: "#fff",
-                  fontWeight: language === "en" ? 700 : 400,
-                  opacity: language === "en" ? 1 : 0.6,
+                  fontWeight: !isArabic ? 700 : 400,
+                  opacity: !isArabic ? 1 : 0.6,
                 }}
               >
                 E
@@ -137,6 +157,7 @@ function Navbar() {
           {/* Mobile Menu Button */}
           <IconButton
             onClick={() => setOpenMenu(true)}
+            aria-label="open navigation menu"
             sx={{
               display: {
                 xs: "flex",
@@ -150,22 +171,38 @@ function Navbar() {
         </Toolbar>
       </AppBar>
 
-      {/* Drawer */}
+      {/* Mobile Drawer */}
       <Drawer
-        anchor="right"
+        anchor= "right" 
         open={openMenu}
         onClose={() => setOpenMenu(false)}
       >
-        <Box sx={{ width: 260 }}>
+        <Box
+          dir={isArabic ? "rtl" : "ltr"}
+          sx={{
+            width: 260,
+            pt: 2,
+          }}
+        >
           <List>
-            {navLinks.map((link) => (
+            {displayLinks.map((link) => (
               <ListItem key={link.id} disablePadding>
                 <ListItemButton
                   component="a"
                   href={`#${link.id}`}
                   onClick={() => setOpenMenu(false)}
+                  sx={{
+                    textAlign: isArabic ? "right" : "left",
+                    px: 3,
+                  }}
                 >
-                  <ListItemText primary={link.label} />
+                  <ListItemText
+                    primary={link.label}
+                    primaryTypographyProps={{
+                      fontWeight: 600,
+                      textAlign: isArabic ? "right" : "left",
+                    }}
+                  />
                 </ListItemButton>
               </ListItem>
             ))}
@@ -176,9 +213,20 @@ function Navbar() {
                   toggleLanguage();
                   setOpenMenu(false);
                 }}
+                sx={{
+                  textAlign: isArabic ? "right" : "left",
+                  px: 3,
+                  mt: 1,
+                  borderTop: "1px solid #E7E9EC",
+                }}
               >
                 <ListItemText
-                  primary={language === "ar" ? "English" : "العربية"}
+                  primary={isArabic ? "English" : "العربية"}
+                  primaryTypographyProps={{
+                    fontWeight: 700,
+                    color: "#1E76BA",
+                    textAlign: isArabic ? "right" : "left",
+                  }}
                 />
               </ListItemButton>
             </ListItem>

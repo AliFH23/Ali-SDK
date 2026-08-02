@@ -8,7 +8,11 @@ import { translations } from "../../data/translations";
 
 const servicesMeta = [
   { id: "custom-programs", icon: TuneIcon, color: "#D6006D" },
-  { id: "accreditations", icon: WorkspacePremiumIcon, color: "#0072BC" },
+  {
+    id: "accreditations",
+    icon: WorkspacePremiumIcon,
+    color: "#0072BC",
+  },
   { id: "workshops", icon: GroupsIcon, color: "#00AEEF" },
   { id: "consulting", icon: InsightsIcon, color: "#D6006D" },
 ];
@@ -17,26 +21,59 @@ function Services() {
   const { language } = useLanguage();
   const t = translations[language].services;
 
+  const isArabic = language === "ar";
+
   return (
-    <Box id="services"  sx={{  backgroundColor: "#FAFAFB", py: { xs: 8, md: 12 } }}>
+    <Box
+      id="services"
+      dir={isArabic ? "rtl" : "ltr"}
+      sx={{
+        backgroundColor: "#FAFAFB",
+        py: { xs: 8, md: 12 },
+      }}
+    >
       <Container maxWidth="lg">
-        <Typography variant="overline" sx={{ color: "#0072BC", display: "block", mb: 1 }}>
+        {/* ثابت على اليسار في العربي والإنجليزي */}
+        <Typography
+          variant="overline"
+          dir="ltr"
+          sx={{
+            color: "#0072BC",
+            display: "block",
+            mb: 1,
+            width: "100%",
+            textAlign: "left",
+            direction: "ltr",
+          }}
+        >
           {t.overline}
         </Typography>
-        <Typography variant="h2" dir="rtl" sx={{ fontSize: { xs: "1.75rem", md: "2.25rem"},  color: "#101828", mb: 1,unicodeBidi:"plaintext", }}>
+
+        <Typography
+          variant="h2"
+          sx={{
+            fontSize: { xs: "1.75rem", md: "2.25rem" },
+            color: "#101828",
+            mb: 1,
+            textAlign: isArabic ? "right" : "left",
+          }}
+        >
           {t.title}
         </Typography>
+
         <Typography
           variant="body1"
-          dir={language === "ar" ? "rtl" : "ltr"}
           sx={{
             color: "#5C6570",
-            mb: 6,
+
+            // فراغ أكبر بين النص والبوكسات
+            mb: { xs: 6, md: 8 },
+
             maxWidth: 560,
-            ml: language === "ar" ? "auto" : 0,
-            mr: language === "ar" ? 0 : "auto",
-            unicodeBidi: "plaintext",
-            textAlign: language === "ar" ? "right" : "left",
+            ml: isArabic ? "auto" : 0,
+            mr: isArabic ? 0 : "auto",
+            textAlign: isArabic ? "right" : "left",
+            lineHeight: 1.8,
           }}
         >
           {t.subtitle}
@@ -44,24 +81,38 @@ function Services() {
 
         <Stack
           direction={{ xs: "column", md: "row" }}
-          spacing={3}
-          sx={{ justifyContent: "space-between" }}
+          sx={{
+            justifyContent: "space-between",
+            direction: isArabic ? "rtl" : "ltr",
+
+            // بدل spacing حتى يكون الفراغ متساويًا في الاتجاهين
+            gap: 3,
+          }}
         >
           {servicesMeta.map((service, index) => {
             const Icon = service.icon;
             const itemText = t.items[index];
+
             return (
               <Paper
                 key={service.id}
                 elevation={0}
                 sx={{
                   p: 4,
-                  width: { xs: "100%", md: "calc(25% - 18px)" },
+                  width: {
+                    xs: "100%",
+                    md: "calc(25% - 18px)",
+                  },
+                  minWidth: 0,
+                  boxSizing: "border-box",
                   border: "1px solid #E7E9EC",
                   borderRadius: "16px",
                   position: "relative",
                   overflow: "hidden",
                   transition: "transform 0.25s, box-shadow 0.25s",
+                  textAlign: isArabic ? "right" : "left",
+                  direction: isArabic ? "rtl" : "ltr",
+
                   "&:hover": {
                     transform: "translateY(-4px)",
                     boxShadow: "0 16px 32px rgba(16,24,40,0.10)",
@@ -78,6 +129,7 @@ function Services() {
                     backgroundColor: service.color,
                   }}
                 />
+
                 <Box
                   sx={{
                     width: 52,
@@ -88,14 +140,41 @@ function Services() {
                     alignItems: "center",
                     justifyContent: "center",
                     mb: 3,
+
+                    // الأيقونة يمين بالعربي ويسار بالإنجليزي
+                    ml: isArabic ? "auto" : 0,
+                    mr: isArabic ? 0 : "auto",
                   }}
                 >
-                  <Icon sx={{ color: service.color, fontSize: 26 }} />
+                  <Icon
+                    sx={{
+                      color: service.color,
+                      fontSize: 26,
+                    }}
+                  />
                 </Box>
-                <Typography variant="h4" dir="rtl" sx={{unicodeBidi:"plaintext", fontSize: "1.1rem", color: "#101828", mb: 1.5 }}>
+
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontSize: "1.1rem",
+                    color: "#101828",
+                    mb: 1.5,
+                    textAlign: isArabic ? "right" : "left",
+                  }}
+                >
                   {itemText.title}
                 </Typography>
-                <Typography variant="body2"dir="rtl" sx={{ unicodeBidi:"plaintext", color: "#5C6570", lineHeight: 1.8, fontSize: "0.9rem" }}>
+
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "#5C6570",
+                    lineHeight: 1.8,
+                    fontSize: "0.9rem",
+                    textAlign: isArabic ? "right" : "left",
+                  }}
+                >
                   {itemText.description}
                 </Typography>
               </Paper>
