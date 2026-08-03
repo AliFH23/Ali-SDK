@@ -57,11 +57,9 @@ function StatItem({
   label,
   shouldStart,
   color,
-  language,
   icon: Icon,
 }) {
   const count = useCountUp(value, shouldStart);
-  const isArabic = language === "ar";
 
   return (
     <Paper
@@ -111,6 +109,8 @@ function StatItem({
       <Typography
         dir="ltr"
         sx={{
+          direction: "ltr",
+          unicodeBidi: "isolate",
           fontFamily: '"Poppins", sans-serif',
           fontWeight: 700,
           fontSize: { xs: "2.2rem", md: "3rem" },
@@ -119,17 +119,9 @@ function StatItem({
           whiteSpace: "nowrap",
         }}
       >
-        {isArabic ? (
-          <>
-            {count.toLocaleString("en-US")}
-            {suffix}
-          </>
-        ) : (
-          <>
-            {suffix}
-            {count.toLocaleString("en-US")}
-          </>
-        )}
+        {suffix}
+        {count.toLocaleString("en-US")}
+        
       </Typography>
 
       <Typography
@@ -216,7 +208,6 @@ function Stats() {
               md: "repeat(3, minmax(0, 1fr))",
             },
 
-            // الفراغ الحقيقي بين الكروت
             columnGap: {
               xs: 3,
               md: 6,
@@ -238,7 +229,6 @@ function Stats() {
               label={item.label}
               color={item.color}
               shouldStart={isVisible}
-              language={language}
               icon={item.icon}
             />
           ))}

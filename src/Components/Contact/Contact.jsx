@@ -18,6 +18,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SendIcon from "@mui/icons-material/Send";
 
 import emailjs from "@emailjs/browser";
+
 import { contactInfo } from "../../data/contactData";
 import { useLanguage } from "../../Context/LanguageContext";
 import { translations } from "../../data/translations";
@@ -117,7 +118,8 @@ function Contact() {
     "& .MuiOutlinedInput-root": {
       borderRadius: "12px",
       backgroundColor: "#FFFFFF",
-      transition: "box-shadow 0.2s ease",
+      transition:
+        "box-shadow 0.2s ease, border-color 0.2s ease",
 
       "& fieldset": {
         borderColor: "#DDE1E6",
@@ -134,6 +136,10 @@ function Contact() {
       "&.Mui-focused fieldset": {
         borderColor: "#1E76BA",
       },
+    },
+
+    "& .MuiInputLabel-root": {
+      textAlign: isArabic ? "right" : "left",
     },
 
     "& .MuiInputLabel-root.Mui-focused": {
@@ -155,7 +161,7 @@ function Contact() {
       }}
     >
       <Container maxWidth="lg">
-        {/* Section title */}
+        {/* Section heading */}
         <Box
           sx={{
             mb: { xs: 5, md: 7 },
@@ -164,12 +170,16 @@ function Contact() {
         >
           <Typography
             variant="overline"
+            dir="ltr"
             sx={{
               color: "#D6006D",
               display: "block",
+              width: "100%",
               mb: 1,
               fontWeight: 600,
               letterSpacing: "0.12em",
+              textAlign: "left",
+              unicodeBidi: "isolate",
             }}
           >
             {t.overline}
@@ -203,12 +213,21 @@ function Contact() {
         </Box>
 
         {/* Contact information cards */}
-        <Grid container spacing={3} sx={{ mb: { xs: 5, md: 7 } }}>
+        <Grid
+          container
+          spacing={3}
+          sx={{
+            mb: { xs: 5, md: 7 },
+          }}
+        >
           {infoItems.map((item) => {
             const Icon = item.icon;
 
             return (
-              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item.label}>
+              <Grid
+                size={{ xs: 12, sm: 6, md: 4 }}
+                key={item.label}
+              >
                 <Paper
                   component={item.href ? "a" : "div"}
                   href={item.href}
@@ -232,7 +251,8 @@ function Contact() {
 
                     "&:hover": {
                       transform: "translateY(-5px)",
-                      boxShadow: "0 16px 35px rgba(16,24,40,0.08)",
+                      boxShadow:
+                        "0 16px 35px rgba(16,24,40,0.08)",
                       borderColor: `${item.color}55`,
                     },
                   }}
@@ -309,38 +329,92 @@ function Contact() {
         </Grid>
 
         {/* Form and map */}
-        <Grid container spacing={4} alignItems="stretch">
+        <Grid
+          container
+          spacing={4}
+          alignItems="flex-start"
+        >
           {/* Contact form */}
           <Grid size={{ xs: 12, md: 6 }}>
             <Paper
               elevation={0}
               sx={{
-                height: "100%",
-                p: { xs: 3, md: 4 },
-                backgroundColor: "#FFFFFF",
-                border: "1px solid #E7E9EC",
-                borderRadius: "18px",
-                boxShadow: "0 12px 30px rgba(16,24,40,0.05)",
+                width: "100%",
+                p: { xs: 2.5, sm: 3, md: 3 },
+                background:
+                  "linear-gradient(180deg, #FFFFFF 0%, #FCFDFE 100%)",
+                border: "1px solid #E3E7EC",
+                borderRadius: "20px",
+                boxShadow:
+                  "0 20px 45px rgba(16,24,40,0.08)",
+                position: "relative",
+                overflow: "hidden",
               }}
             >
+              {/* Top gradient line */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "5px",
+                  background:
+                    "linear-gradient(90deg, #D6006D 0%, #1E76BA 100%)",
+                }}
+              />
+
+              {/* Form icon */}
+              <Box
+                sx={{
+                  width: 62,
+                  height: 62,
+                  borderRadius: "50%",
+                  backgroundColor: "rgba(30,118,186,0.10)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  mb: 2.5,
+                  mt: 1,
+                  ml: isArabic ? "auto" : 0,
+                  mr: isArabic ? 0 : "auto",
+                }}
+              >
+                <SendIcon
+                  sx={{
+                    color: "#1E76BA",
+                    fontSize: 30,
+                    transform: isArabic
+                      ? "scaleX(-1)"
+                      : "none",
+                  }}
+                />
+              </Box>
+
               <Typography
                 variant="h3"
                 sx={{
-                  fontSize: { xs: "1.3rem", md: "1.5rem" },
+                  fontSize: {
+                    xs: "1.4rem",
+                    md: "1.7rem",
+                  },
                   fontWeight: 700,
                   color: "#101828",
-                  mb: 1,
+                  mb: 0.75,
                   textAlign: isArabic ? "right" : "left",
                 }}
               >
-                {isArabic ? "أرسل لنا رسالة" : "Send us a message"}
+                {isArabic
+                  ? "أرسل لنا رسالة"
+                  : "Send us a message"}
               </Typography>
 
               <Typography
                 sx={{
                   color: "#5C6570",
-                  mb: 4,
+                  mb: 2.5,
                   lineHeight: 1.7,
+                  fontSize: "0.95rem",
                   textAlign: isArabic ? "right" : "left",
                 }}
               >
@@ -356,12 +430,12 @@ function Contact() {
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: 2.5,
+                  gap: 2,
                 }}
               >
                 <Stack
                   direction={{ xs: "column", sm: "row" }}
-                  spacing={2.5}
+                  spacing={2}
                 >
                   <TextField
                     name="name"
@@ -403,7 +477,7 @@ function Contact() {
                   fullWidth
                   required
                   multiline
-                  rows={6}
+                  rows={4}
                   value={form.message}
                   onChange={handleChange("message")}
                   sx={textFieldStyles}
@@ -445,29 +519,39 @@ function Contact() {
                     isSending ? (
                       <CircularProgress
                         size={19}
-                        sx={{ color: "#FFFFFF" }}
+                        sx={{
+                          color: "#FFFFFF",
+                        }}
                       />
                     ) : (
                       <SendIcon
                         sx={{
-                          transform: isArabic ? "scaleX(-1)" : "none",
+                          transform: isArabic
+                            ? "scaleX(-1)"
+                            : "none",
                         }}
                       />
                     )
                   }
                   sx={{
+                    mt: 0.5,
                     backgroundColor: "#1E76BA",
-                    py: 1.5,
-                    minHeight: 52,
-                    borderRadius: "12px",
-                    fontSize: "1rem",
+                    py: 1.65,
+                    minHeight: 54,
+                    borderRadius: "14px",
+                    fontSize: "1.05rem",
                     fontWeight: 700,
                     textTransform: "none",
-                    boxShadow: "0 8px 18px rgba(30,118,186,0.22)",
+                    boxShadow:
+                      "0 10px 22px rgba(30,118,186,0.24)",
+                    transition:
+                      "transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease",
 
                     "&:hover": {
                       backgroundColor: "#00558C",
-                      boxShadow: "0 10px 22px rgba(30,118,186,0.30)",
+                      transform: "translateY(-2px)",
+                      boxShadow:
+                        "0 14px 28px rgba(30,118,186,0.30)",
                     },
 
                     "&.Mui-disabled": {
@@ -496,14 +580,18 @@ function Contact() {
             <Paper
               elevation={0}
               sx={{
-                height: "100%",
-                minHeight: { xs: 380, md: 590 },
+                width: "100%",
+                height: {
+                  xs: 420,
+                  md: 560,
+                },
                 p: 1,
                 backgroundColor: "#FFFFFF",
                 border: "1px solid #E7E9EC",
-                borderRadius: "18px",
+                borderRadius: "20px",
                 overflow: "hidden",
-                boxShadow: "0 12px 30px rgba(16,24,40,0.05)",
+                boxShadow:
+                  "0 20px 45px rgba(16,24,40,0.08)",
               }}
             >
               <Box
@@ -518,7 +606,6 @@ function Contact() {
                   display: "block",
                   width: "100%",
                   height: "100%",
-                  minHeight: { xs: 360, md: 570 },
                   border: 0,
                   borderRadius: "14px",
                 }}

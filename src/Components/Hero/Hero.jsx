@@ -55,12 +55,14 @@ function Hero() {
         >
           <Typography
             variant="overline"
+            dir="ltr"
             sx={{
               display: "block",
               width: "100%",
               color: "#00AEEF",
               mb: 1,
-              textAlign: isArabic ? "right" : "left",
+              textAlign: "left",
+              unicodeBidi: "isolate",
             }}
           >
             {t.overline}

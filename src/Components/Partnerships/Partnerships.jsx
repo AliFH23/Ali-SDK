@@ -18,12 +18,16 @@ function Partnerships() {
       }}
     >
       <Container maxWidth="lg">
-        <Typography
+       <Typography
           variant="overline"
+          dir="ltr"
           sx={{
             color: "#D6006D",
             display: "block",
             mb: 1,
+            width: "100%",
+            textAlign: "left",
+            unicodeBidi: "isolate",
           }}
         >
           {t.overline}

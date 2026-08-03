@@ -46,11 +46,14 @@ function About() {
       <Container maxWidth="lg">
         <Typography
           variant="overline"
+          dir="ltr"
           sx={{
             color: "#D6006D",
             display: "block",
             mb: 1,
-            textAlign: isArabic ? "right" : "left",
+            width: "100%",
+            textAlign: "left",
+            unicodeBidi: "isolate",
           }}
         >
           {t.overline}

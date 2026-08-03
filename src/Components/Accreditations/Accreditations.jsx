@@ -11,7 +11,18 @@ function Accreditations() {
   return (
     <Box id="accreditations" sx={{ backgroundColor: "#FAFAFB", py: { xs: 8, md: 12 } }}>
       <Container maxWidth="lg">
-        <Typography variant="overline" sx={{ color: "#0072BC", display: "block", mb: 1 }}>
+        <Typography
+          variant="overline"
+          dir="ltr"
+          sx={{
+            color: "#0072BC",
+            display: "block",
+            mb: 1,
+            width: "100%",
+            textAlign: "left",
+            unicodeBidi: "isolate",
+          }}
+        >
           {t.overline}
         </Typography>
         <Typography
