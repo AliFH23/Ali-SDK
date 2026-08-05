@@ -34,7 +34,7 @@ function Navbar() {
     { label: t.nav.partnerships, id: "partnerships" },
   ];
 
-  const displayLinks = isArabic ? [...navLinks].reverse() : navLinks;
+  const displayLinks = navLinks;
 
   return (
     <>
